@@ -126,6 +126,8 @@ lvim.plugins = {
 
 
 }
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
+
 
 
 local dap_ok, dapgo = pcall(require, "dap-go")
