@@ -26,22 +26,30 @@ local hour = tonumber(os.date('%H'))
 
 lvim.builtin.project.detection_methods = { " " }
 
--- Set the colorscheme based on the time of day
 if hour >= 6 and hour < 18 then
     -- If it's between 6 AM and 6 PM, use a light colorscheme
     --
-    lvim.colorscheme = "onehalf-lush"
+    lvim.colorscheme = "rose-pine-dawn"
     vim.cmd("set background=light")
+    vim.opt.cursorline = false
 else
     -- Otherwise, use a dark colorscheme
 
 
     lvim.colorscheme = "zhxo"
+    vim.cmd("set background=dark")
+    vim.opt.cursorline = false
 end
+
+-- lvim.colorscheme = "zhxo"
+-- vim.opt.cursorline = false
+-- vim.cmd("set background=dark")
+
+
 
 
 lvim.format_on_save.enabled = true
-lvim.format_on_save.pattern = { "*.lua", "*.py", "*.go", "*.js", "*.rs", "*.java", "*.rb" }
+lvim.format_on_save.pattern = { "*.lua", "*.py", "*.go", "*.js", "*.rs", "*.java", "*.rb", "*.ts", "*.exs", "*.cs" }
 
 lvim.builtin.terminal.open_mapping = "<C-t>"
 
@@ -54,13 +62,14 @@ formatters.setup {
         ---@usage arguments to pass to the formatter
         -- these cannot contain whitespace
         -- options such as `--line-width 80` become either `{"--line-width", "80"}` or `{"--line-width=80"}`
-        args = { "--print-width", "100", "--line-width", "80" },
+        args = { "--print-width", "100", "--line-width", "80", "--tab-width", "4" },
         ---@usage only start in these filetypes, by default it will attach to all filetypes it supports
         filetypes = { "typescript", "typescriptreact", "javascript" },
     },
     { command = "goimports", filetypes = { "go" } },
     { command = "gofumpt",   filetypes = { "go" } },
-    { command = "rubocop",   filetypes = { "ruby" } }
+    { command = "rubocop",   filetypes = { "ruby" } },
+
 }
 
 local linters = require "lvim.lsp.null-ls.linters"
@@ -69,7 +78,7 @@ linters.setup {
     {
         name = "shellcheck",
         args = { "--severity", "warning" },
-    }, { command = "eslint", filetypes = { "javascript" } }
+    },
 
 }
 
@@ -101,31 +110,20 @@ lvim.plugins = {
     {
     },
     {
-        "sainnhe/edge"
-    },
-    {
         "folke/todo-comments.nvim"
     },
     { 'Mohammed-Taher/AdvancedNewFile.nvim' },
     {
-        "theHamsta/nvim_rocks",
-        event = "VeryLazy",
-        build = "pip3 install --user hererocks && python3 -mhererocks . -j2.1.0-beta3 -r3.0.0 && cp nvim_rocks.lua lua",
-        config = function()
-            local nvim_rocks = require "nvim_rocks"
-            nvim_rocks.ensure_installed "uuid"
-        end,
-    }, {
-    'mrcjkb/rustaceanvim',
-    version = '^4', -- Recommended
-    ft = { 'rust' },
-    { 'sxhk0/zhxo.nvim' },
-    { "rose-pine/neovim" },
-    { "CodeGradox/onehalf-lush" },
+        'mrcjkb/rustaceanvim',
+        version = '^4', -- Recommended
+        ft = { 'rust' },
+        { 'sxhk0/zhxo.nvim' },
+        { "rose-pine/neovim" },
+    }
 }
 
 
-}
+
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
 
 
@@ -150,21 +148,11 @@ gopher.setup {
         iferr = "iferr",
     },
 }
-lvim.builtin.treesitter.ensure_installed = {
-    "java",
-}
 
 
 
-lvim.lsp.installer.setup.ensure_installed = {
-    "jsonls",
-    "html",
-    "cssls",
-    "emmet_ls",
-    "tsserver",
-    "jdtls",
-    "vuels",
-}
+
+
 local bufnr = vim.api.nvim_get_current_buf()
 vim.keymap.set(
     "n",
