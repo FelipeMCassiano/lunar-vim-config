@@ -106,10 +106,6 @@ lvim.plugins = {
         end
     },
     {
-    },
-    {
-    },
-    {
         "folke/todo-comments.nvim"
     },
     { 'Mohammed-Taher/AdvancedNewFile.nvim' },
