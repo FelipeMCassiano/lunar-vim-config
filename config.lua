@@ -1,7 +1,8 @@
 -- Forum: https://www.reddit.com/r/lunarvim/
+
+
 -- Discord: https://discord.com/invite/Xb9B4Ny
--- Read the docs: https://www.lunarvim.org/docs/configuration
--- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
+-- Read the docs: https://www.lunarvim.org/docs/configuration Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
 -- Forum: https://www.reddit.com/r/lunarvim/
 --
 -- Discord: https://discord.com/invite/Xb9B4Ny
@@ -14,30 +15,18 @@ lvim.builtin.treesitter.ensure_installed = {
     "go", "gomod",
 }
 local formatters = require "lvim.lsp.null-ls.formatters"
--- if current_hour == 6 then
--- lvim.colorscheme = "catppuccin-latte"
-
--- elseif current_hour == 18  then lvim.colorscheme = "darcula"
--- end
 
 local hour = tonumber(os.date('%H'))
-
-
 
 lvim.builtin.project.detection_methods = { " " }
 
 if hour >= 6 and hour < 18 then
     -- If it's between 6 AM and 6 PM, use a light colorscheme
-    --
-    lvim.colorscheme = "rose-pine-dawn"
+    lvim.colorscheme = "dawnfox"
     vim.cmd("set background=light")
     vim.opt.cursorline = false
 else
-    -- Otherwise, use a dark colorscheme
-
-
-    lvim.colorscheme = "zhxo"
-    vim.cmd("set background=dark")
+    lvim.colorscheme = "vesper"
     vim.opt.cursorline = false
 end
 
@@ -49,7 +38,7 @@ end
 
 
 lvim.format_on_save.enabled = true
-lvim.format_on_save.pattern = { "*.lua", "*.py", "*.go", "*.js", "*.rs", "*.java", "*.rb", "*.ts", "*.exs", "*.cs" }
+lvim.format_on_save.pattern = { "*.lua", "*.py", "*.go", "*.js", "*.rs", "*.java", "*.rb", "*.ts", "*.exs", "*.cs", "*.c" }
 
 lvim.builtin.terminal.open_mapping = "<C-t>"
 
@@ -115,6 +104,13 @@ lvim.plugins = {
         ft = { 'rust' },
         { 'sxhk0/zhxo.nvim' },
         { "rose-pine/neovim" },
+        { "norcalli/nvim-colorizer.lua" },
+        { "datsfilipe/nvim-colorscheme-template" },
+
+        { "FelipeMCassiano/martian.nvim" },
+        { 'datsfilipe/vesper.nvim' },
+        { "EdenEast/nightfox.nvim" }
+
     }
 }
 
