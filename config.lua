@@ -78,22 +78,9 @@ code_actions.setup {
     },
 }
 lvim.plugins = {
-
     { "lunarvim/colorschemes" },
     { "olexsmir/gopher.nvim" },
     { "leoluz/nvim-dap-go" },
-    {
-        "p00f/nvim-ts-rainbow",
-        config = function()
-            require('nvim-treesitter.configs').setup {
-                rainbow = {
-                    enable = true,
-                    extended_mode = true,
-                    max_file_lines = nil,
-                }
-            }
-        end
-    },
     {
         "folke/todo-comments.nvim"
     },
@@ -102,21 +89,19 @@ lvim.plugins = {
         'mrcjkb/rustaceanvim',
         version = '^4', -- Recommended
         ft = { 'rust' },
-        { 'sxhk0/zhxo.nvim' },
-        { "rose-pine/neovim" },
-        { "norcalli/nvim-colorizer.lua" },
-        { "datsfilipe/nvim-colorscheme-template" },
-
-        { "FelipeMCassiano/martian.nvim" },
-        { 'datsfilipe/vesper.nvim' },
-        { "EdenEast/nightfox.nvim" }
-
-    }
+    },
+    { 'sxhk0/zhxo.nvim' },
+    { "rose-pine/neovim" },
+    { "norcalli/nvim-colorizer.lua" },
+    { "datsfilipe/nvim-colorscheme-template" },
+    { "FelipeMCassiano/martian.nvim" },
+    { 'datsfilipe/vesper.nvim' },
+    { "EdenEast/nightfox.nvim" },
+    { "mrjones2014/nvim-ts-rainbow" }
 }
 
-
-
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
+lvim.builtin.treesitter.rainbow.enable = true
 
 
 
